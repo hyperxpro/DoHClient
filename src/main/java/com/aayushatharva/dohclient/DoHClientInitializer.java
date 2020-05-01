@@ -19,9 +19,8 @@ class DoHClientInitializer extends ChannelInitializer<SocketChannel> {
     }
 
     @Override
-    protected void initChannel(SocketChannel socketChannel) throws Exception {
-        socketChannel.pipeline().addLast(sslCtx.newHandler(socketChannel.alloc()));
-        socketChannel.pipeline().addLast(new ALPNHandler());
+    protected void initChannel(SocketChannel socketChannel) {
+        socketChannel.pipeline().addLast(sslCtx.newHandler(socketChannel.alloc()), new ALPNHandler());
     }
 
     /**
